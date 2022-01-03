@@ -20,16 +20,28 @@ function logIn(arguments) {
 
 }
 
+
 function getImssWorkerData() {
     let form = document.getElementById('ifrPaginaSecundaria');
 
     let chbFile = form.contentWindow.document.getElementById('rdoArchivo');
-    let chbCard = form.contentWindow.document.getElementById('rdoTarjeton');
+    let chbCard = form.contentWindow.document.getElementById('rdoXML');
 
     chbFile.checked = true;
     chbCard.checked = true;
 
     let btnDownload = form.contentWindow.document.getElementById('btnAceptar');
+
+    let cardsAvailable = form.contentWindow.document.getElementsByTagName('tr');
+
+    console.log(cardsAvailable)
+
+    for (let card of cardsAvailable) {
+        if (card.id != null && card.id != '') {
+            card.click();
+            btnDownload.click();
+        }
+    }
 
     // btnDownload.click(); jqgh_jqGridTarjetones_Periodo
 
