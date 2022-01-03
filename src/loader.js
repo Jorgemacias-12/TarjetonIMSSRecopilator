@@ -34,8 +34,6 @@ function getImssWorkerData() {
 
     let cardsAvailable = form.contentWindow.document.getElementsByTagName('tr');
 
-    console.log(cardsAvailable)
-
     for (let card of cardsAvailable) {
         if (card.id != null && card.id != '') {
             card.click();
