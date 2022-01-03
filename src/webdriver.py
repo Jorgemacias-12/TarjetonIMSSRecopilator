@@ -1,21 +1,25 @@
 import os
 
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-
 from dotenv import load_dotenv
-
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
 def readScript():
     with open('loader.js') as reader:
         return reader.read()
 
 
+def checkDir():
+    if (os.path.exists('downloads')):
+        print("Dir, already exists")
+    else:
+        os.mkdir('downloads')
+
+
 def main():
     envData = []
-    driver = webdriver.Firefox(
-        executable_path=r'C:\webdriver\\geckodriver.exe'
-    )
+    checkDir()
     driver.get('http://rh.imss.gob.mx/TarjetonDigital/')
     load_dotenv()
     envData.append(
