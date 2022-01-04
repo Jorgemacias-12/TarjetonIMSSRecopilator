@@ -34,10 +34,15 @@ function getImssWorkerData() {
 
     let cardsAvailable = form.contentWindow.document.getElementsByTagName('tr');
 
+    
     for (let card of cardsAvailable) {
         if (card.id != null && card.id != '') {
             card.click();
             btnDownload.click();
+            setTimeout( (card, button) => {
+                card.click();
+                button.click()
+            }, 3000)
         }
     }
 
@@ -46,11 +51,6 @@ function getImssWorkerData() {
 }
 
 switch (pageState) {
-    case 'loading':
-        console.log('Loading...');
-        break;
-    case 'interactive':
-        break;
     case 'complete':
 
         logIn(arguments);
