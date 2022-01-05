@@ -2,8 +2,8 @@ var pageState = document.readyState;
 
 let form = document.getElementById('ifrPaginaSecundaria');
 
-const IMSS_WORKER_ID = arguments[0];
-const IMSS_WORKER_DDL = arguments[1];
+const IMSS_WORKER_ID = arguments[1];
+const IMSS_WORKER_DDL = arguments[0];
 const IMSS_WORKER_PS = arguments[2];
 const IS_FIRST_RUN = arguments[3];
 
@@ -31,7 +31,7 @@ function navigate() {
     setTimeout( () => {
 
         if (IS_FIRST_RUN) {
-            
+
         }
 
     }, 1000);
@@ -75,6 +75,6 @@ function getImssWorkerData() {
 
 switch (pageState) {
     case 'complete':
-        login();
+        logIn();
         break;
 }
