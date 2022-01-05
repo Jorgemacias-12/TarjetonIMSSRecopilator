@@ -1,8 +1,13 @@
 var pageState = document.readyState;
 
+let form = document.getElementById('ifrPaginaSecundaria');
 
-function logIn(arguments) {
-    let form = document.getElementById('ifrPaginaSecundaria');
+const IMSS_WORKER_ID = arguments[0];
+const IMSS_WORKER_DDL = arguments[1];
+const IMSS_WORKER_PS = arguments[2];
+const IS_FIRST_RUN = arguments[3];
+
+function logIn() {
 
     let ddlDelegacion = form.contentWindow.document.getElementById('ddlDelegacion');
     let imssWorkerID = form.contentWindow.document.getElementById('txtUsuario');
@@ -10,9 +15,9 @@ function logIn(arguments) {
 
     let formButton = form.contentWindow.document.getElementById('btnIngresar');
 
-    ddlDelegacion.value = `${arguments[0]}`;
-    imssWorkerID.value = `${arguments[1]}`;
-    imssWorkerPassword[0].value = `${arguments[2]}`;
+    ddlDelegacion.value = `${IMSS_WORKER_DDL}`;
+    imssWorkerID.value = `${IMSS_WORKER_ID}`;
+    imssWorkerPassword[0].value = `${IMSS_WORKER_PS}`;
 
     formButton.click();
 
@@ -20,9 +25,29 @@ function logIn(arguments) {
 
 }
 
+function navigate() {
+    // go to the beginning of the data last_jqPagTarjetones
+    
+    setTimeout( () => {
+
+        if (IS_FIRST_RUN) {
+            
+        }
+
+    }, 1000);
+
+    // validate if the content is dowbnladded and go to another page using prev_jqPagTarjetones
+
+    setTimeout(() => {
+        let selectEIV = form.contentWindow.document.querySelector('select');
+
+        selectEIV.options[1].selected = true;
+
+    }, 1000);
+
+}
 
 function getImssWorkerData() {
-    let form = document.getElementById('ifrPaginaSecundaria');
 
     let chbFile = form.contentWindow.document.getElementById('rdoArchivo');
     let chbCard = form.contentWindow.document.getElementById('rdoXML');
@@ -34,17 +59,15 @@ function getImssWorkerData() {
 
     let cardsAvailable = form.contentWindow.document.getElementsByTagName('tr');
 
-    
-    for (let card of cardsAvailable) {
-        if (card.id != null && card.id != '') {
-            card.click();
-            btnDownload.click();
-            setTimeout( (card, button) => {
-                card.click();
-                button.click()
-            }, 3000)
-        }
-    }
+    navigate();
+
+    // for (let card of cardsAvailable) {
+    //     setTimeout(()=> {},1000);
+    //     if (card.id != null && card.id != '') {
+    //         card.click();
+    //         btnDownload.click();
+    //     }
+    // }
 
     // btnDownload.click(); jqgh_jqGridTarjetones_Periodo
 
@@ -52,8 +75,6 @@ function getImssWorkerData() {
 
 switch (pageState) {
     case 'complete':
-
-        logIn(arguments);
-
+        login();
         break;
 }
